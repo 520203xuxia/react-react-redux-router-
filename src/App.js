@@ -1,28 +1,19 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+export default class App extends React.Component{
+  // constructor(props){
+  //   super(props);
+  // }
 
-class App extends Component {
-  render() {
+  render(){
+    const {store, addGUN, removeGUN, addGunAsync} = this.props;
+    const num = store.getState();
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <h1>现在有机枪{num}把</h1>
+        <button onClick={()=>store.dispatch(addGUN())}>申请武器</button>
+        <button onClick={()=>store.dispatch(removeGUN())}>上交武器</button>
+        <button onClick={()=>store.dispatch(addGunAsync())}>晚两天给你</button>
       </div>
-    );
+    )
   }
 }
-
-export default App;
