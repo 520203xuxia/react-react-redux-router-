@@ -4,14 +4,13 @@ import {addGUN, removeGUN, addGunAsync} from './index.redux';
 // 使用装饰器的写法
 @connect(
   // 你要state什么属性放到props里
-  state => ({num: state}),
+  state => ({num: state.counter}),
   // 你要什么方法，放到props里，自动dispatch
   { addGUN, removeGUN, addGunAsync }
 )
 class App extends React.Component{
   render(){
     const {addGUN, removeGUN, addGunAsync, num} = this.props;
-    console.log(this.props);
     return (
       <div>
         <h1>现在有机枪{num}把</h1>
