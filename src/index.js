@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 
 import App from './App';
 import { counter } from './index.redux';
@@ -19,6 +19,10 @@ function Erying(){
 function Qibinglian(){
   return <h2>骑兵连</h2>
 }
+function Test(props){
+  console.log(props);
+  return <h2>{props.match.url} not found</h2>
+}
 ReactDom.render(
   (<Provider store={store}>
     <BrowserRouter>
@@ -30,9 +34,14 @@ ReactDom.render(
           <li><Link to='/qibinglian'>骑兵连</Link></li>
         </ul>
         {/* 路由对应渲染模板 exact代码完全匹配*/}
-        <Route path='/' exact component={App}></Route>
-        <Route path='/erying' component={Erying}></Route>
-        <Route path='/qibinglian' component={Qibinglian}></Route>
+        <Switch>{/*Switch 只渲染命中的第一个Route*/}
+          <Route path='/' exact component={App}></Route>
+          <Route path='/erying' component={Erying}></Route>
+          <Route path='/qibinglian' component={Qibinglian}></Route>
+          <Route path='/:location' component={Test}></Route>
+        </Switch>
+
+
       </div>
     </BrowserRouter>
   </Provider>)
